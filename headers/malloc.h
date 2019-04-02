@@ -21,6 +21,8 @@
 # define TINY_ZONE 1024
 # define SMALL_ZONE TINY_ZONE * 16
 
+# define ZONE_ALLOCATIONS 100
+
 
 /*
 **	malloc.c
