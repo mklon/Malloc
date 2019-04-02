@@ -6,5 +6,5 @@ cmake-build-debug/*
 .idea
 .idea/*
 computorv2
-
+.*
 #*
