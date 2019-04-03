@@ -14,6 +14,7 @@
 # define MALLOC_H
 
 # include <stdlib.h>
+# include <sys/mman.h>
 # include "../printflibft/get_next_line.h"
 # include "../printflibft/ft_printf.h"
 # include "../printflibft/libft/libft.h"
@@ -23,6 +24,21 @@
 
 # define ZONE_ALLOCATIONS 100
 
+# define TINY	1
+# define SMALL	2
+# define LARGE	3
+
+# define ALLOCATION_SIZE (sizeof(t_allocation))
+
+void 			*g_init;
+
+typedef struct	s_zone {
+
+}				t_zone;
+
+typedef struct	s_allocation {
+
+}				t_allocation;
 
 /*
 **	malloc.c
@@ -41,5 +57,12 @@ void	*realloc(void *ptr, size_t size);
 */
 
 void	free(void *ptr);
+
+/*
+**	zone_handler.c
+*/
+
+size_t	get_memory_size(char zone_type, size_t zone_size);
+t_zone	*assign_zone(size_t size);
 
 #endif
