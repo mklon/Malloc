@@ -24,6 +24,7 @@ SRC =	main.c\
 		source/malloc.c\
 		source/realloc.c\
 		source/free.c\
+		source/zone_handler.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,7 +38,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) -o $(NAME) $(OBJ) $(LIBFT)
 
 $(OBJ): %.o: %.c
-	$(CC) -c $(FLAGS) $< -o $@
+	$(CC) -c  $< -o $@
 
 $(LIBFT):
 	make -C printflibft/

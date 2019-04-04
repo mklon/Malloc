@@ -16,7 +16,6 @@ size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
 	size_t	i;
 	size_t	page;
 
-	i = 0;
 	page = (size_t)getpagesize();
 	if (!allocations || !page)
 		return (page_amount);
@@ -28,30 +27,40 @@ size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
 	}
 }
 
-size_t	get_memory_size(char zone_type, size_t size)
+size_t	get_memory_size(size_t size, char type)
 {
-	if (zone_type == TINY || zone_type == SMALL)
-		return (calculate_memory(size, 0, 0));
+	if (type == TINY || type == SMALL)
+		return (calculate_memory(size, 0, ALLOCATION_SIZE + size));
 	else
 		return (ALLOCATION_SIZE + size);
 }
 
-t_zone	*assign_zone(size_t size)
+void	*assign_zone(void *ptr, size_t size, char type)
 {
-	t_zone	*zone;
-	size_t	*memsize;
+	size_t	zone_size;
 
-	if (size <= TINY_ZONE)
-		memsize = get_memory_size(TINY, TINY_ZONE);
-	else if (size <= SMALL_ZONE)
-		memsize = get_memory_size(SMALL, SMALL_ZONE);
-	else
-		memsize = get_memory_size(LARGE, size);
+	if (ptr)
+		return (ptr);
+	zone_size = get_memory_size(size, type);
 
 
-	mmap(0, memsize, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	ft_printf("32");
+	return (NULL);
 
-	//INIT
-
-	return (zone);
 }
+
+void	*assign_mem(size_t size, t_allmem *mem)
+{
+	if (size <= TINY_ZONE)
+		return ((t_cell*)assign_zone(mem->tiny_zone_begin, size, LARGE));
+	else if (size <= SMALL_ZONE)
+		return (assign_zone(mem->small_zone_begin, size, SMALL));
+	else
+		return (assign_zone(mem->large_zone_begin, size, LARGE));
+}
+
+/*
+	zone = mmap(0, memsize, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	if (zone == MAP_FAILED)
+		return (NULL);
+*/

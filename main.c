@@ -1,21 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: oposhiva <oposhiva@student.unit.ua>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 20:10:32 by oposhiva          #+#    #+#             */
-/*   Updated: 2019/04/02 20:10:33 by oposhiva         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
-#include "headers/malloc.h"
 
 int main() {
-	malloc(42);
-	realloc(NULL, 42);
-	free(NULL);
+	printf("Hello, World!\n");
 	return 0;
 }

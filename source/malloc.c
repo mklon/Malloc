@@ -14,13 +14,16 @@
 
 void	*malloc(size_t size)
 {
-	t_zone	*zone;
+	static t_allmem	mem;
+	t_cell		*zone;
+	void 		*ptr;
 
-	zone = (t_zone*)g_init;
-	if (!zone)
-	{
-		zone = assign_zone(size);
-	}
-	return (NULL);
-	return (NULL);
+	if (!g_init)
+		g_init = &mem;
+	zone = assign_mem(size, &mem);
+	if (zone == NULL)
+		return (NULL);
+
+
+	return (ptr);
 }

@@ -28,41 +28,53 @@
 # define SMALL	2
 # define LARGE	3
 
-# define ALLOCATION_SIZE (sizeof(t_allocation))
+# define ALLOCATION_SIZE (sizeof(t_cell))
 
-void 			*g_init;
+typedef	enum	e_bool {
+	TRUE,
+	FALSE
+}				t_bool;
 
-typedef struct	s_zone {
+typedef struct	s_allmem {
+	void	*tiny_zone_begin;
+	void	*small_zone_begin;
+	void	*large_zone_begin;
+}				t_allmem;
 
-}				t_zone;
+typedef struct	s_cell {
+	void		*cell_begin;
+	void		*next_cell;
+	void		*cell_type;
+	void		*cell_size;
+	void		*zone_begin;
+	t_bool		is_occupied;
+}				t_cell;
 
-typedef struct	s_allocation {
-
-}				t_allocation;
+t_allmem		*g_init;
 
 /*
 **	malloc.c
 */
 
-void	*malloc(size_t size);
+void			*malloc(size_t size);
 
 /*
 **	realloc.c
 */
 
-void	*realloc(void *ptr, size_t size);
+void			*realloc(void *ptr, size_t size);
 
 /*
 **	free.h
 */
 
-void	free(void *ptr);
+void			free(void *ptr);
 
 /*
 **	zone_handler.c
 */
 
-size_t	get_memory_size(char zone_type, size_t zone_size);
-t_zone	*assign_zone(size_t size);
+size_t	get_memory_size(size_t zone_size, char type);
+void	*assign_mem(size_t size, t_allmem *mem);
 
 #endif
