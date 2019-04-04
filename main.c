@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include "headers/malloc.h"
 
 int main() {
-	printf("Hello, World!\n");
+	malloc(100);
+	malloc(10250);
+
 	return 0;
 }

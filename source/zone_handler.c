@@ -12,6 +12,16 @@
 
 #include "../headers/malloc.h"
 
+void	*allocate_mem(size_t mem_size)
+{
+	void	*ptr;
+
+	ptr = mmap(0, mem_size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	if (ptr == MAP_FAILED)
+		return (NULL);
+	return (ptr);
+}
+
 size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
 	size_t	i;
 	size_t	page;
@@ -42,25 +52,29 @@ void	*assign_zone(void *ptr, size_t size, char type)
 	if (ptr)
 		return (ptr);
 	zone_size = get_memory_size(size, type);
-
-
-	ft_printf("32");
-	return (NULL);
-
+	ptr = allocate_mem(zone_size);
+	return (ptr);
 }
 
 void	*assign_mem(size_t size, t_allmem *mem)
 {
 	if (size <= TINY_ZONE)
-		return ((t_cell*)assign_zone(mem->tiny_zone_begin, size, LARGE));
+	{
+		mem->tiny_zone_begin = (t_cell*)assign_zone(mem->tiny_zone_begin, size, TINY);
+		return (mem->tiny_zone_begin);
+	}
 	else if (size <= SMALL_ZONE)
-		return (assign_zone(mem->small_zone_begin, size, SMALL));
+	{
+		mem->small_zone_begin = (t_cell*)assign_zone(mem->small_zone_begin, size, SMALL);
+		return (mem->small_zone_begin);
+	}
 	else
-		return (assign_zone(mem->large_zone_begin, size, LARGE));
+	{
+		mem->large_zone_begin = (t_cell*)assign_zone(mem->large_zone_begin, size, LARGE);
+		return (mem->large_zone_begin);
+	}
 }
 
 /*
-	zone = mmap(0, memsize, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	if (zone == MAP_FAILED)
-		return (NULL);
+
 */

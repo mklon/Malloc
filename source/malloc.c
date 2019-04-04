@@ -24,6 +24,5 @@ void	*malloc(size_t size)
 	if (zone == NULL)
 		return (NULL);
 
-
 	return (ptr);
 }
