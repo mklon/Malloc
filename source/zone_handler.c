@@ -22,7 +22,8 @@ void	*allocate_mem(size_t mem_size)
 	return (ptr);
 }
 
-size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
+size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations)
+{
 	size_t	i;
 	size_t	page;
 
@@ -32,7 +33,7 @@ size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
 	while (1)
 	{
 		i = (page * page_amount++) / size;
-		if (ZONE_ALLOCATIONS < i)
+		if (CELLS_IN_ZONE < i)
 			return (page_amount * page);
 	}
 }
@@ -40,19 +41,18 @@ size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations){
 size_t	get_memory_size(size_t size, char type)
 {
 	if (type == TINY || type == SMALL)
-		return (calculate_memory(size, 0, ALLOCATION_SIZE + size));
+		return (calculate_memory(size, 0, CELL_SIZE + size));
 	else
-		return (ALLOCATION_SIZE + size);
+		return (CELL_SIZE + size);
 }
 
 void	*assign_zone(void *ptr, size_t size, char type)
 {
 	size_t	zone_size;
 
-	if (ptr)
-		return (ptr);
 	zone_size = get_memory_size(size, type);
 	ptr = allocate_mem(zone_size);
+	printf("strat - %p\nend   - %p\n\n", ptr, ptr + zone_size);
 	return (ptr);
 }
 
@@ -60,21 +60,23 @@ void	*assign_mem(size_t size, t_allmem *mem)
 {
 	if (size <= TINY_ZONE)
 	{
-		mem->tiny_zone_begin = (t_cell*)assign_zone(mem->tiny_zone_begin, size, TINY);
-		return (mem->tiny_zone_begin);
+		if (mem->tiny_zone_begin)
+			return (mem->tiny_zone_begin);
+		mem->tiny_zone_begin = (t_cell*)assign_zone(mem->tiny_zone_begin, TINY_ZONE, TINY);
+		return (init_first_cell(mem->tiny_zone_begin, TINY_ZONE, TINY));
 	}
 	else if (size <= SMALL_ZONE)
 	{
-		mem->small_zone_begin = (t_cell*)assign_zone(mem->small_zone_begin, size, SMALL);
-		return (mem->small_zone_begin);
+		if (mem->small_zone_begin)
+			return (mem->small_zone_begin);
+		mem->small_zone_begin = (t_cell*)assign_zone(mem->small_zone_begin, SMALL_ZONE, SMALL);
+		return (init_first_cell(mem->small_zone_begin, SMALL_ZONE, SMALL));
 	}
 	else
 	{
+		if (mem->large_zone_begin)
+			return (mem->large_zone_begin);
 		mem->large_zone_begin = (t_cell*)assign_zone(mem->large_zone_begin, size, LARGE);
-		return (mem->large_zone_begin);
+		return (init_first_cell(mem->large_zone_begin, size, LARGE));
 	}
 }
-
-/*
-
-*/

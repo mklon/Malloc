@@ -13,22 +13,24 @@
 #ifndef MALLOC_H
 # define MALLOC_H
 
+#include <stdio.h>
+
 # include <stdlib.h>
 # include <sys/mman.h>
 # include "../printflibft/get_next_line.h"
 # include "../printflibft/ft_printf.h"
 # include "../printflibft/libft/libft.h"
 
-# define TINY_ZONE 1024
+# define TINY_ZONE 512
 # define SMALL_ZONE TINY_ZONE * 16
 
-# define ZONE_ALLOCATIONS 100
+# define CELLS_IN_ZONE 100
 
 # define TINY	1
 # define SMALL	2
 # define LARGE	3
 
-# define ALLOCATION_SIZE (sizeof(t_cell))
+# define CELL_SIZE (sizeof(t_cell))
 
 typedef	enum	e_bool {
 	TRUE,
@@ -44,9 +46,10 @@ typedef struct	s_allmem {
 typedef struct	s_cell {
 	void		*cell_begin;
 	void		*next_cell;
-	void		*cell_type;
-	void		*cell_size;
-	void		*zone_begin;
+	void		*mem_area;
+	char 		type;
+	size_t		cell_num;
+	size_t		size;
 	t_bool		is_occupied;
 }				t_cell;
 
@@ -74,7 +77,19 @@ void			free(void *ptr);
 **	zone_handler.c
 */
 
-size_t	get_memory_size(size_t zone_size, char type);
+void	*allocate_mem(size_t mem_size);
+size_t	calculate_memory(size_t size, size_t page_amount, size_t allocations);
+size_t	get_memory_size(size_t size, char type);
+void	*assign_zone(void *ptr, size_t size, char type);
 void	*assign_mem(size_t size, t_allmem *mem);
+
+//size_t	get_memory_size(size_t zone_size, char type);
+
+/*
+**	cell_handler.c
+*/
+
+void	*init_first_cell(void *zone_begin, size_t cell_size, char type);
+t_cell	*get_free_cell(t_cell *first_cell, size_t size);
 
 #endif
