@@ -13,13 +13,10 @@
 #ifndef MALLOC_H
 # define MALLOC_H
 
-#include <stdio.h>
-
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/mman.h>
-# include "../printflibft/get_next_line.h"
-# include "../printflibft/ft_printf.h"
-# include "../printflibft/libft/libft.h"
+# include "../libft/libft.h"
 
 # define TINY_ZONE 512
 # define SMALL_ZONE TINY_ZONE * 16
@@ -72,6 +69,12 @@ void			*realloc(void *ptr, size_t size);
 */
 
 void			free(void *ptr);
+
+/*
+**	calloc.c
+*/
+
+void	*calloc(size_t num, size_t size);
 
 /*
 **	zone_handler.c

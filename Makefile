@@ -18,7 +18,7 @@ NAME = libft_malloc_$(HOSTTYPE).so
 
 CC = gcc
 
-LIBFT = printflibft/libftprintf.a
+LIBFT = libft/libft.a
 
 SRC =	main.c\
 		source/malloc.c\
@@ -31,10 +31,11 @@ SRC =	main.c\
 		source/getter.c\
 		source/cell_del.c\
 		source/show_alloc_mem.c\
+		source/calloc.c\
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = headers/malloc.h printflibft/get_next_line.h printflibft/ft_printf.h
+HEADERS = headers/malloc.h libft/libft.h
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -47,13 +48,13 @@ $(OBJ): %.o: %.c
 	$(CC) -c  $< -o $@
 
 $(LIBFT):
-	make -C printflibft/
+	make -C libft/
 
 libft_clean:
-	make -C printflibft/ clean
+	make -C libft/ clean
 
 libft_fclean:
-	make -C printflibft/ fclean
+	make -C libft/ fclean
 
 clean: libft_clean
 	rm -f $(OBJ) headers/malloc.h.gch get_next_line.h.gch *~
