@@ -16,11 +16,10 @@ void	display_zone(void *ptr)
 {
 	t_cell *first_cell;
 
-
 	if (ptr == NULL)
 	{
 		ft_putstr("Zone is empty!\n");
-		return;
+		return ;
 	}
 	first_cell = (t_cell*)ptr;
 	while (first_cell != NULL)
@@ -35,14 +34,13 @@ void	display_zone(void *ptr)
 	}
 }
 
-void	show_alloc_mem()
+void	show_alloc_mem(void)
 {
 	if (g_init == NULL)
 	{
 		ft_putstr("All zones are empty!\n");
-		return;
+		return ;
 	}
-
 	ft_putstr("TINY ZONE : ");
 	ft_put_addr((int)g_init->tiny_zone_begin);
 	ft_putstr("\n");

@@ -16,7 +16,7 @@ void	*malloc(size_t size)
 {
 	static t_allmem	mem;
 	t_cell			*first_cell;
-	t_cell 			*cell;
+	t_cell			*cell;
 
 	if (!g_init)
 		g_init = &mem;

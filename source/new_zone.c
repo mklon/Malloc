@@ -24,7 +24,6 @@ t_cell	*init_new_zone_cell(void *new_zone_begin, t_cell *pre_zone)
 	cell->is_occupied = TRUE;
 	cell->type = pre_zone->type;
 	cell->size = pre_zone->size;
-
 	return (cell->cell_begin);
 }
 

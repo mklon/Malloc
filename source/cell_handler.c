@@ -17,8 +17,7 @@ void	*init_first_cell(void *zone_begin, size_t cell_size, char type)
 	t_cell	*cell;
 
 	if (zone_begin == NULL)
-		return NULL;
-
+		return (NULL);
 	cell = (t_cell*)zone_begin;
 	cell->cell_begin = zone_begin;
 	cell->next_cell = NULL;
@@ -27,11 +26,10 @@ void	*init_first_cell(void *zone_begin, size_t cell_size, char type)
 	cell->is_occupied = FALSE;
 	cell->size = cell_size;
 	cell->type = type;
-
 	return (cell->cell_begin);
 }
 
-t_cell	*init_next_cell(void *ptr, t_cell* pre_cell)
+t_cell	*init_next_cell(void *ptr, t_cell *pre_cell)
 {
 	t_cell	*cell;
 
@@ -43,7 +41,6 @@ t_cell	*init_next_cell(void *ptr, t_cell* pre_cell)
 	cell->is_occupied = TRUE;
 	cell->type = pre_cell->type;
 	cell->size = pre_cell->size;
-
 	return (cell->cell_begin);
 }
 
@@ -58,7 +55,8 @@ t_cell	*get_free_cell(t_cell *first_cell, size_t size)
 		return (allocate_large_zone(free_cell, size));
 	while (free_cell != NULL)
 	{
-		if (free_cell->cell_num % CELLS_IN_ZONE == 0 && free_cell->next_cell == NULL)
+		if (free_cell->cell_num % CELLS_IN_ZONE == 0
+				&& free_cell->next_cell == NULL)
 			return (allocate_new_zone(free_cell, size));
 		if (free_cell->is_occupied == FALSE)
 		{

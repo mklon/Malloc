@@ -12,7 +12,7 @@
 
 #include "../headers/malloc.h"
 
-void *realloc(void *ptr, size_t size)
+void	*realloc(void *ptr, size_t size)
 {
 	void	*new_ptr;
 
@@ -22,7 +22,8 @@ void *realloc(void *ptr, size_t size)
 	new_ptr = NULL;
 	if (size != 0)
 		new_ptr = malloc(size);
-	if (ptr != NULL) {
+	if (ptr != NULL)
+	{
 		ft_strncpy(new_ptr, ptr, size);
 		free(ptr);
 	}

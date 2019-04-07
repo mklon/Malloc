@@ -18,12 +18,11 @@ void	free(void *ptr)
 
 	cell = find_cell(ptr);
 	if (cell == NULL)
-		return;
+		return ;
 	if (cell->type == LARGE)
 	{
 		free_large_cell(cell);
-		return;
+		return ;
 	}
 	cell->is_occupied = FALSE;
-	//CHECK FOR ZONE DELETION
 }

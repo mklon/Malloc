@@ -24,7 +24,6 @@ t_cell	*init_large_zone(void *ptr, t_cell *pre_cell, size_t size)
 	cell->is_occupied = TRUE;
 	cell->type = LARGE;
 	cell->size = size;
-
 	return (cell->cell_begin);
 }
 

@@ -33,7 +33,7 @@ t_cell	*find_cell(void *ptr)
 	if (cell == NULL)
 	{
 		cell = find_in_zone(g_init->small_zone_begin, ptr);
-		if(cell == NULL)
+		if (cell == NULL)
 		{
 			cell = find_in_zone(g_init->large_zone_begin, ptr);
 			if (cell == NULL)
@@ -55,10 +55,10 @@ void	free_large_cell(t_cell *cell)
 
 	pre_cell = NULL;
 	last_cell = (t_cell*)g_init->large_zone_begin;
-	while(last_cell != NULL)
+	while (last_cell != NULL)
 	{
 		if (last_cell == cell->cell_begin)
-			break;
+			break ;
 		pre_cell = last_cell;
 		last_cell = last_cell->next_cell;
 	}
