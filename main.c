@@ -4,11 +4,21 @@
 int main() {
 
 	int i = 0;
-	while (i <= CELLS_IN_ZONE)
+	char	*ptr;
+
+	while (++i <= CELLS_IN_ZONE*10)
 	{
-		malloc(1024);
-		malloc(500);
-		printf("%d\n", i++);
+
+		ptr = malloc(500);
+		ptr = malloc(1000);
+		ptr = malloc(10000);
+		printf("%d\n", i);
 	}
+
 	return 0;
 }
+
+/*
+	ptr = ft_strcpy(ptr, "FUCK YEAH!!!!!");
+	printf("%s", ptr);
+*/

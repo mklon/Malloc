@@ -25,6 +25,10 @@ SRC =	main.c\
 		source/realloc.c\
 		source/free.c\
 		source/zone_handler.c\
+		source/cell_handler.c\
+		source/large_cell.c\
+		source/new_zone.c\
+		source/getter.c
 
 OBJ = $(SRC:.c=.o)
 

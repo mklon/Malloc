@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.c                                           :+:      :+:    :+:   */
+/*   getter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oposhiva <oposhiva@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 20:04:34 by oposhiva          #+#    #+#             */
-/*   Updated: 2019/04/02 20:04:35 by oposhiva         ###   ########.fr       */
+/*   Created: 2019/04/07 12:43:40 by oposhiva          #+#    #+#             */
+/*   Updated: 2019/04/07 12:43:40 by oposhiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/malloc.h"
 
-void	*malloc(size_t size)
+char	get_size_type(size_t size)
 {
-	static t_allmem	mem;
-	t_cell			*first_cell;
-	t_cell 			*cell;
+	if (size <= TINY_ZONE)
+		return (TINY);
+	else if (size <= SMALL_ZONE)
+		return (SMALL);
+	else
+		return (LARGE);
+}
 
-	if (!g_init)
-		g_init = &mem;
-	first_cell = assign_mem(size, &mem);
-	if (first_cell == NULL)
-		return (NULL);
-
-	cell = get_free_cell(first_cell, size);
-	if (cell == NULL)
-		return (NULL);
-	return (cell->mem_area);
+size_t	get_max_size(size_t size)
+{
+	if (size <= TINY_ZONE)
+		return (TINY_ZONE);
+	else if (size <= SMALL_ZONE)
+		return (SMALL_ZONE);
+	else
+		return (size);
 }

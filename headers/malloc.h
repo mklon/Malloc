@@ -90,6 +90,27 @@ void	*assign_mem(size_t size, t_allmem *mem);
 */
 
 void	*init_first_cell(void *zone_begin, size_t cell_size, char type);
+t_cell	*init_next_cell(void *ptr, t_cell* pre_cell);
 t_cell	*get_free_cell(t_cell *first_cell, size_t size);
+
+/*
+**	large_cell.c
+*/
+
+t_cell	*allocate_large_zone(t_cell *first_cell, size_t size);
+
+/*
+**	new_zone.c
+*/
+
+t_cell	*init_new_zone_cell(void *new_zone_begin, t_cell *pre_zone);
+t_cell	*allocate_new_zone(t_cell *last_cell, size_t size);
+
+/*
+**	getter.c
+*/
+
+char	get_size_type(size_t size);
+size_t	get_max_size(size_t size);
 
 #endif

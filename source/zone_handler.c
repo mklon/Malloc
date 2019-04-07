@@ -52,7 +52,6 @@ void	*assign_zone(void *ptr, size_t size, char type)
 
 	zone_size = get_memory_size(size, type);
 	ptr = allocate_mem(zone_size);
-	printf("strat - %p\nend   - %p\n\n", ptr, ptr + zone_size);
 	return (ptr);
 }
 
