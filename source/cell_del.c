@@ -12,13 +12,34 @@
 
 #include "../headers/malloc.h"
 
+t_cell	*find_in_zone(t_cell *first_cell, void *mem)
+{
+	while (first_cell != NULL)
+	{
+		if (first_cell->mem_area == mem)
+			return (first_cell->cell_begin);
+		first_cell = first_cell->next_cell;
+	}
+	return (NULL);
+}
+
 t_cell	*find_cell(void *ptr)
 {
 	t_cell	*cell;
 
 	if (ptr == NULL)
 		return (NULL);
-	cell = (t_cell*)(ptr - CELL_SIZE);
+	cell = find_in_zone(g_init->tiny_zone_begin, ptr);
+	if (cell == NULL)
+	{
+		cell = find_in_zone(g_init->small_zone_begin, ptr);
+		if(cell == NULL)
+		{
+			cell = find_in_zone(g_init->large_zone_begin, ptr);
+			if (cell == NULL)
+				return (NULL);
+		}
+	}
 	return (cell->cell_begin);
 }
 

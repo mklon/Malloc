@@ -112,12 +112,21 @@ t_cell	*allocate_new_zone(t_cell *last_cell, size_t size);
 
 char	get_size_type(size_t size);
 size_t	get_max_size(size_t size);
+void	ft_put_addr(int addr);
 
 /*
 **	cell_del.c
 */
 
+t_cell	*find_in_zone(t_cell *first_cell, void *mem);
 t_cell	*find_cell(void *ptr);
 void	free_large_cell(t_cell *cell);
+
+/*
+**	show_alloc_mem.c
+*/
+
+void	display_zone(void *ptr);
+void	show_alloc_mem();
 
 #endif

@@ -29,7 +29,8 @@ SRC =	main.c\
 		source/large_cell.c\
 		source/new_zone.c\
 		source/getter.c\
-		spurce/cell_del.c\
+		source/cell_del.c\
+		source/show_alloc_mem.c\
 
 OBJ = $(SRC:.c=.o)
 

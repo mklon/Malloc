@@ -31,3 +31,26 @@ size_t	get_max_size(size_t size)
 	else
 		return (size);
 }
+
+void	ft_put_addr(int addr)
+{
+	int		i;
+	int		hex;
+	char	res[16];
+
+	i = 0;
+	ft_bzero(res, 16);
+	while (addr != 0)
+	{
+		hex = addr % 16;
+		if (hex >= 10)
+			res[i++] = (char)(hex + 'a' - 10);
+		else
+			res[i++] = (char)(hex + '0');
+		addr /= 16;
+	}
+	ft_putstr("0x10");
+	i--;
+	while (i >= 0)
+		ft_putchar(res[i--]);
+}

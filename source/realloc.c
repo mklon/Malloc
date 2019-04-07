@@ -14,7 +14,17 @@
 
 void *realloc(void *ptr, size_t size)
 {
-	(void)ptr;
-	(void)size;
-	return (NULL);
+	void	*new_ptr;
+
+	ptr = find_cell(ptr);
+	if (ptr == NULL)
+		return (NULL);
+	new_ptr = NULL;
+	if (size != 0)
+		new_ptr = malloc(size);
+	if (ptr != NULL) {
+		ft_strncpy(new_ptr, ptr, size);
+		free(ptr);
+	}
+	return (new_ptr);
 }
