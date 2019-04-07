@@ -6,12 +6,9 @@ int main() {
 	int		i = 0;
 	void	*ptr;
 
-	while (++i <= CELLS_IN_ZONE/10)
-	{
-		ptr = malloc(500);
-		ptr = malloc(1000);
-		ptr = malloc(10000);
-	}
+	calloc(10, 50);
+	calloc(100, 50);
+	calloc(100, 500);
 	show_alloc_mem();
 }
 
@@ -21,12 +18,14 @@ int main() {
 */
 
 /*
-while (++i <= CELLS_IN_ZONE*1000)
-	{
+	int		i = 0;
+	void	*ptr;
 
+	while (++i <= CELLS_IN_ZONE/10)
+	{
 		ptr = malloc(500);
 		ptr = malloc(1000);
 		ptr = malloc(10000);
-		printf("%d\n", i);
 	}
+	show_alloc_mem();
 */
