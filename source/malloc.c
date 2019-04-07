@@ -23,7 +23,6 @@ void	*malloc(size_t size)
 	first_cell = assign_mem(size, &mem);
 	if (first_cell == NULL)
 		return (NULL);
-
 	cell = get_free_cell(first_cell, size);
 	if (cell == NULL)
 		return (NULL);

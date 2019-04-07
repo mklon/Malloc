@@ -34,8 +34,9 @@ t_cell	*allocate_large_zone(t_cell *first_cell, size_t size)
 	t_cell	*new_cell;
 	t_cell	*free_cell;
 
+	if (first_cell->is_occupied == FALSE && first_cell->next_cell == NULL)
+		return (first_cell->cell_begin);
 	free_cell = first_cell;
-
 	while (free_cell != NULL)
 	{
 		pre_cell = free_cell;

@@ -14,6 +14,16 @@
 
 void	free(void *ptr)
 {
-	(void)ptr;
-	return;
+	t_cell	*cell;
+
+	cell = find_cell(ptr);
+	if (cell == NULL)
+		return;
+	if (cell->type == LARGE)
+	{
+		free_large_cell(cell);
+		return;
+	}
+	cell->is_occupied = FALSE;
+	//CHECK FOR ZONE DELETION
 }

@@ -28,7 +28,8 @@ SRC =	main.c\
 		source/cell_handler.c\
 		source/large_cell.c\
 		source/new_zone.c\
-		source/getter.c
+		source/getter.c\
+		spurce/cell_del.c\
 
 OBJ = $(SRC:.c=.o)
 
