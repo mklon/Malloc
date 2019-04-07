@@ -18,10 +18,10 @@
 # include <sys/mman.h>
 # include "../libft/libft.h"
 
-# define TINY_ZONE 512
+# define TINY_ZONE 1024
 # define SMALL_ZONE TINY_ZONE * 16
 
-# define CELLS_IN_ZONE 100
+# define CELLS_IN_ZONE 175
 
 # define TINY	1
 # define SMALL	2
